@@ -4,10 +4,11 @@ read.gtex.data <- function (file) {
                     stringsAsFactors = FALSE,check.names = FALSE)
   ids <- out$gene_id
   out <- out[-(1:2)]
+  out <- as.matrix(out)
   rownames(out) <- ids
 
   # Make the tissue names easier to read.
-  tissues <- names(out)
+  tissues <- colnames(out)
   tissues <- gsub(" - "," ",tissues,fixed = TRUE,ignore.case=FALSE,perl=FALSE)
   tissues <- gsub("(","",tissues,fixed = TRUE,ignore.case = FALSE,perl = FALSE)
   tissues <- gsub(")","",tissues,fixed = TRUE,ignore.case = FALSE,perl = FALSE)
