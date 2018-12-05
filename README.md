@@ -1,2 +1,1 @@
-# gtex
-Exploratory analyses of GTEx data
+# Exploratory analyses of GTEx data
