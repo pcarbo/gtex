@@ -5,7 +5,7 @@
 #  - Rscript ...
 #  - working directory.
 #  - Install ggplot2.
-#  - output/gtexpca.out
+#  - see expected results here: output/gtexpca.out
 #
 
 # ANALYSIS SETTINGS
@@ -23,10 +23,17 @@ source("../code/gtexpca.functions.R")
 
 # READ DATA
 # ---------
-# Read the gene expression data.
+cat("Reading GTEx gene expression data.\n")
 gtex <- read.gtex.data(gtex.data.file)
+cat(sprintf("Number of genes: %d\n",nrow(gtex)))
+cat(sprintf("Number of tissue types: %d\n",ncol(gtex)))
 
-
+# COMPUTE PRINCIPAL COMPONENTS
+# ----------------------------
+cat("Computing PCs from the gene expression data.\n")
+gtex.pca <- prcomp(gtex,retx = FALSE)
+cat("Summary of the first two PCs:\n")
+print(summary(gtex.pca)$importance[,1:2])
 
 # SESSION INFO
 # ------------
