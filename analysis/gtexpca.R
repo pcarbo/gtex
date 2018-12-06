@@ -42,6 +42,7 @@ cat(sprintf("Total number of genes: %d\n",ncol(gtex)))
 # COMPUTE PRINCIPAL COMPONENTS
 # ----------------------------
 gtex.pca <- prcomp(gtex)
+head(gtex.pca$sdev)
 
 # SUMMARIZE TOP 2 PCs
 # -------------------
