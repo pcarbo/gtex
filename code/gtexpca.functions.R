@@ -13,10 +13,10 @@ read.gtex.data <- function (file) {
 
   # Make the tissue names easier to read.
   tissues <- colnames(out)
-  tissues <- gsub(" - "," ",tissues,fixed = TRUE,ignore.case=FALSE,perl=FALSE)
-  tissues <- gsub("(","",tissues,fixed = TRUE,ignore.case = FALSE,perl = FALSE)
-  tissues <- gsub(")","",tissues,fixed = TRUE,ignore.case = FALSE,perl = FALSE)
-  names(out) <- tissues
+  tissues <- gsub(" - "," ",tissues,fixed = TRUE,perl = FALSE)
+  tissues <- gsub("(","",tissues,fixed = TRUE,perl = FALSE)
+  tissues <- gsub(")","",tissues,fixed = TRUE,perl = FALSE)
+  colnames(out) <- tolower(tissues)
 
   # Return an n x p matrix, where n is the number of tissues and p is
   # the number of genes.
@@ -42,6 +42,6 @@ plot.gtex.top2pcs <- function (gtex, gtex.pca) {
   return(ggplot(pdat,aes(x = PC1,y = PC2,label = tissue,color = brain)) +
          geom_text(color = "dodgerblue",size = 3,hjust = 0) +
          geom_point(shape = 20,size = 2,show.legend = FALSE) +
-         scale_color_manual(values = c("black","magenta")) +
+         scale_color_manual(values = c("darkblue","darkorange")) +
          theme_cowplot(font_size = 12))
 }

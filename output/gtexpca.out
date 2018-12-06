@@ -71,6 +71,10 @@ Total number of tissue types: 53
 > cat(sprintf("Total number of genes: %d\n",ncol(gtex)))
 Total number of genes: 56202
 > 
+> # Remove pancreas and whole blood.
+> rows <- !is.element(rownames(gtex),c("pancreas","whole blood"))
+> gtex <- gtex[rows,]
+> 
 > # COMPUTE PRINCIPAL COMPONENTS
 > # ----------------------------
 > gtex.pca <- prcomp(gtex)
@@ -78,10 +82,10 @@ Total number of genes: 56202
 > # SUMMARIZE TOP 2 PCs
 > # -------------------
 > print(summary(gtex.pca)$importance[,1:2])
-                              PC1        PC2
-Standard deviation     51717.6505 34597.4468
-Proportion of Variance     0.5155     0.2307
-Cumulative Proportion      0.5155     0.7462
+                              PC1       PC2
+Standard deviation     49153.3889 1.476e+04
+Proportion of Variance     0.7249 6.539e-02
+Cumulative Proportion      0.7249 7.903e-01
 > 
 > # PLOT TOP 2 PCs
 > # --------------
@@ -90,6 +94,9 @@ Cumulative Proportion      0.5155     0.7462
 > pdf(NULL)
 > p <- plot.gtex.top2pcs(gtex,gtex.pca)
 > ggsave(pc.plot.file,p,height = 4,width = 4,dpi = 200)
+> dev.off()
+null device 
+          1 
 > 
 > # SESSION INFO
 > # ------------
@@ -125,4 +132,4 @@ loaded via a namespace (and not attached):
 > 
 > proc.time()
    user  system elapsed 
-  4.452   0.219   4.750 
+  4.363   0.234   4.725 
