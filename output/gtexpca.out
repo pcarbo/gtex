@@ -34,6 +34,9 @@ Type 'q()' to quit R.
 +   file.path("..","data",
 +             "GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz")
 > 
+> # The PCA plot will be saved to this file.
+> pc.plot.file <- "../output/gtexpca.png"
+> 
 > # SET UP ENVIRONMENT
 > # ------------------
 > # Load the ggplot2 and cowplot libraries, as well as some additional
@@ -55,8 +58,6 @@ package ‘cowplot’ was built under R version 3.4.4
 > 
 > # LOAD & PREPARE DATA
 > # -------------------
-> cat("Reading GTEx gene expression data.\n")
-Reading GTEx gene expression data.
 > gtex <- read.gtex.data(gtex.data.file)
 > cat(sprintf("Total number of tissue types: %d\n",nrow(gtex)))
 Total number of tissue types: 53
@@ -65,20 +66,55 @@ Total number of genes: 56202
 > 
 > # COMPUTE PRINCIPAL COMPONENTS
 > # ----------------------------
-> cat("Computing PCs from the gene expression data.\n")
-Computing PCs from the gene expression data.
 > gtex.pca <- prcomp(gtex)
 > 
-> # SUMMARIZE THE TOP 2 PCs
-> # -----------------------
-> cat("Summary of the first two PCs:\n")
-Summary of the first two PCs:
+> # SUMMARIZE TOP 2 PCs
+> # -------------------
 > print(summary(gtex.pca)$importance[,1:2])
                               PC1        PC2
 Standard deviation     51717.6505 34597.4468
 Proportion of Variance     0.5155     0.2307
 Cumulative Proportion      0.5155     0.7462
 > 
-> stop()
-Error: 
-Execution halted
+> # PLOT TOP 2 PCs
+> # --------------
+> # Show the projection of the tissues onto PCs 1 and 2, highlighting
+> # the brain tissues in magenta.
+> p <- plot.gtex.top2pcs(gtex,gtex.pca)
+> ggsave(pc.plot.file,p,height = 4,width = 4,dpi = 200)
+> 
+> # SESSION INFO
+> # ------------
+> # This gives information about the computing environment used to
+> # generate the above results, such as the version of R, and the
+> # versions of the R packages that were used.
+> print(sessionInfo())
+R version 3.4.3 (2017-11-30)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS High Sierra 10.13.6
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] cowplot_0.9.3 ggplot2_3.1.0
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.0       digest_0.6.17    withr_2.1.2      dplyr_0.7.6     
+ [5] assertthat_0.2.0 grid_3.4.3       plyr_1.8.4       R6_2.2.2        
+ [9] gtable_0.2.0     magrittr_1.5     scales_0.5.0     pillar_1.2.1    
+[13] rlang_0.2.2      lazyeval_0.2.1   bindrcpp_0.2.2   labeling_0.3    
+[17] tools_3.4.3      glue_1.3.0       purrr_0.2.5      munsell_0.4.3   
+[21] compiler_3.4.3   pkgconfig_2.0.2  colorspace_1.4-0 tidyselect_0.2.4
+[25] bindr_0.1.1      tibble_1.4.2    
+> 
+> proc.time()
+   user  system elapsed 
+  4.516   0.210   4.776 

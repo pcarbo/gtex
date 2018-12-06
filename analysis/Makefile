@@ -1,14 +1,17 @@
 # A Makefile for generating the results of the analyses.
 
-all: ../output/gtexpca.out
-
 codedir = ../code
 outdir  = ../output
 
-$(outdir)/gtexpca.out: gtexpca.R $(codedir)/gtexpca.functions.R
-	R CMD BATCH gtexpca.R $(outdir)/gtexpca.out
+all: $(outdir)/gtexpca.out \
+     $(outdir)/gtexpca.png
+
+$(outdir)/gtexpca.out $(outdir)/gtexpca.png: gtexpca.R \
+                                             $(codedir)/gtexpca.functions.R
+	R CMD BATCH --no-save gtexpca.R $(outdir)/gtexpca.out
 
 clean:
-	rm -f $(outdir)/gtexpca.out
+	rm -f $(outdir)/gtexpca.out 
+	rm -f $(outdir)/gtexpca.png
 
 
