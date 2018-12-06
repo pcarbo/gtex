@@ -1,5 +1,9 @@
-# TO DO: Explain here briefly what this function does.
+# This function reads GTEx gene expression data (median TPM by tissue)
+# from a tab-delimited text file. The return value is a matrix with
+# one row per tissue and column per
 read.gtex.data <- function (file) {
+
+  # Read the data from the tab-delimited text file.
   out <- read.table(file,sep = "\t",header = TRUE,skip = 2,
                     stringsAsFactors = FALSE,check.names = FALSE)
   ids <- out$gene_id
@@ -13,6 +17,8 @@ read.gtex.data <- function (file) {
   tissues <- gsub("(","",tissues,fixed = TRUE,ignore.case = FALSE,perl = FALSE)
   tissues <- gsub(")","",tissues,fixed = TRUE,ignore.case = FALSE,perl = FALSE)
   names(out) <- tissues
-  
-  return(out)
+
+  # Return an n x p matrix, where n is the number of tissues and p is
+  # the number of genes.
+  return(t(out))
 }
