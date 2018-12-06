@@ -1,11 +1,18 @@
-# TO DO: Briefly explain here what this script does, and how to run
-# it.
+# In this analysis, we compute principal components from the GTEx gene
+# expression data (median TPM by tissue), and plot the top two PCs. In
+# the plot, we highlight the clustering of the brain tissues.
 #
-# NOTES:
-#  - Rscript ...
-#  - working directory.
-#  - Install ggplot2 & cowplot.
-#  - see expected results here: output/gtexpca.out
+# To run this code, you need to have the ggplot2 and cowplot packages
+# installed.
+#
+# When running this code interactively in R or RStudio, you should
+# make sure that your working directory is set to the same location as
+# this file.
+#
+# The output is the PC plot saved to gtexpca.png.
+#
+# See also gtexpca.out in the "output" directory for results that were
+# previously generated using this script.
 #
 
 # ANALYSIS SETTINGS
@@ -44,6 +51,7 @@ print(summary(gtex.pca)$importance[,1:2])
 # --------------
 # Show the projection of the tissues onto PCs 1 and 2, highlighting
 # the brain tissues in magenta.
+pdf(NULL)
 p <- plot.gtex.top2pcs(gtex,gtex.pca)
 ggsave(pc.plot.file,p,height = 4,width = 4,dpi = 200)
 
