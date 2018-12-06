@@ -39,6 +39,9 @@ gtex <- read.gtex.data(gtex.data.file)
 cat(sprintf("Total number of tissue types: %d\n",nrow(gtex)))
 cat(sprintf("Total number of genes: %d\n",ncol(gtex)))
 
+# Remove whole blood data.
+gtex <- gtex[-53,]
+
 # COMPUTE PRINCIPAL COMPONENTS
 # ----------------------------
 gtex.pca <- prcomp(gtex)
