@@ -24,6 +24,7 @@ gtex.data.file <-
 
 # The PCA plot will be saved to this file.
 pc.plot.file <- "../output/gtexpca.png"
+pc.barin.plot.file <- "../output/gtexpcabrain.png"
 
 # SET UP ENVIRONMENT
 # ------------------
@@ -42,13 +43,17 @@ cat(sprintf("Total number of genes: %d\n",ncol(gtex)))
 # Remove whole blood data.
 gtex <- gtex[-53,]
 
+gtex.brain <- gtex[8:20,]
+
 # COMPUTE PRINCIPAL COMPONENTS
 # ----------------------------
 gtex.pca <- prcomp(gtex)
+gtex.brain.pca <- prcomp(gtex.brain)
 
 # SUMMARIZE TOP 2 PCs
 # -------------------
 print(summary(gtex.pca)$importance[,1:2])
+print(summary(gtex.brain.pca)$importance[,1:2])
 
 # PLOT TOP 2 PCs
 # --------------
@@ -57,6 +62,10 @@ print(summary(gtex.pca)$importance[,1:2])
 pdf(NULL)
 p <- plot.gtex.top2pcs(gtex,gtex.pca)
 ggsave(pc.plot.file,p,height = 4,width = 4,dpi = 200)
+
+pdf(NULL)
+p <- plot.gtex.top2pcs(gtex.brain,gtex.brain.pca)
+ggsave(pc.barin.plot.file,p,height = 4,width = 4,dpi = 200)
 
 # SESSION INFO
 # ------------
