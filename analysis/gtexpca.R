@@ -9,7 +9,7 @@
 # make sure that your working directory is set to the same location as
 # this file.
 #
-# The output is the PC plot saved to gtexpca.png.
+# The output is the PC plot saved to gtexpca.pdf.
 #
 # See also gtexpca.out in the "output" directory for results that were
 # previously generated using this script.
@@ -23,7 +23,7 @@ gtex.data.file <-
             "GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz")
 
 # The PCA plot will be saved to this file.
-pc.plot.file <- "../output/gtexpca.png"
+pc.plot.file <- "../output/gtexpca.pdf"
 
 # SET UP ENVIRONMENT
 # ------------------
@@ -56,7 +56,7 @@ print(summary(gtex.pca)$importance[,1:2])
 # the brain tissues in magenta.
 pdf(NULL)
 p <- plot.gtex.top2pcs(gtex,gtex.pca)
-ggsave(pc.plot.file,p,height = 4,width = 4,dpi = 200)
+ggsave(pc.plot.file,p,height = 4,width = 4)
 
 # SESSION INFO
 # ------------
