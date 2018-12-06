@@ -44,7 +44,8 @@ gtex <- gtex[-53,]
 
 # COMPUTE PRINCIPAL COMPONENTS
 # ----------------------------
-gtex.pca <- prcomp(gtex)
+# Use randomized SVD
+gtex.pca <- rsvd::rsvd(gtex, 2)
 
 # SUMMARIZE TOP 2 PCs
 # -------------------
