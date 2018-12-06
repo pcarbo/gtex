@@ -23,7 +23,7 @@ gtex.data.file <-
             "GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz")
 
 # The PCA plot will be saved to this file.
-pc.plot.file <- "../output/gtexpca.png"
+pc.plot.file <- "../output/gtexpca_zihao.png"
 
 # SET UP ENVIRONMENT
 # ------------------
