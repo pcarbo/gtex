@@ -40,7 +40,7 @@ cat(sprintf("Total number of tissue types: %d\n",nrow(gtex)))
 cat(sprintf("Total number of genes: %d\n",ncol(gtex)))
 
 # Remove whole blood data.
-gtex <- gtex[-53,]
+gtex <- gtex[-50,]
 
 # COMPUTE PRINCIPAL COMPONENTS
 # ----------------------------
