@@ -17,7 +17,8 @@ gtex.data.file <-
 
 # SET UP ENVIRONMENT
 # ------------------
-# TO DO: Add description here.
+# Load the ggplot2 and cowplot libraries, as well as some additional
+# functions used in this analysis.
 library(ggplot2)
 library(cowplot)
 source("../code/gtexpca.functions.R")

@@ -1,0 +1,84 @@
+
+R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # TO DO: Briefly explain here what this script does, and how to run
+> # it.
+> #
+> # NOTES:
+> #  - Rscript ...
+> #  - working directory.
+> #  - Install ggplot2 & cowplot.
+> #  - see expected results here: output/gtexpca.out
+> #
+> 
+> # ANALYSIS SETTINGS
+> # -----------------
+> # The file containing the gene expression data (median TPM by tissue).
+> gtex.data.file <-
++   file.path("..","data",
++             "GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz")
+> 
+> # SET UP ENVIRONMENT
+> # ------------------
+> # Load the ggplot2 and cowplot libraries, as well as some additional
+> # functions used in this analysis.
+> library(ggplot2)
+Warning message:
+package ‘ggplot2’ was built under R version 3.4.4 
+> library(cowplot)
+
+Attaching package: ‘cowplot’
+
+The following object is masked from ‘package:ggplot2’:
+
+    ggsave
+
+Warning message:
+package ‘cowplot’ was built under R version 3.4.4 
+> source("../code/gtexpca.functions.R")
+> 
+> # LOAD & PREPARE DATA
+> # -------------------
+> cat("Reading GTEx gene expression data.\n")
+Reading GTEx gene expression data.
+> gtex <- read.gtex.data(gtex.data.file)
+> cat(sprintf("Total number of tissue types: %d\n",nrow(gtex)))
+Total number of tissue types: 53
+> cat(sprintf("Total number of genes: %d\n",ncol(gtex)))
+Total number of genes: 56202
+> 
+> # COMPUTE PRINCIPAL COMPONENTS
+> # ----------------------------
+> cat("Computing PCs from the gene expression data.\n")
+Computing PCs from the gene expression data.
+> gtex.pca <- prcomp(gtex)
+> 
+> # SUMMARIZE THE TOP 2 PCs
+> # -----------------------
+> cat("Summary of the first two PCs:\n")
+Summary of the first two PCs:
+> print(summary(gtex.pca)$importance[,1:2])
+                              PC1        PC2
+Standard deviation     51717.6505 34597.4468
+Proportion of Variance     0.5155     0.2307
+Cumulative Proportion      0.5155     0.7462
+> 
+> stop()
+Error: 
+Execution halted
