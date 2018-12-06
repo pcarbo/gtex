@@ -54,8 +54,9 @@ print(summary(gtex.pca)$importance[,1:2])
 # --------------
 # Show the projection of the tissues onto PCs 1 and 2, highlighting
 # the brain tissues in magenta.
-p <- plot.gtex.top2pcs(gtex,gtex.pca)
-ggsave(pc.plot.file,p,height = 8,width = 8)
+pdf(pc.plot.file,height = 8,width = 8)
+plot.gtex.top2pcs(gtex,gtex.pca)
+dev.off()
 
 # SESSION INFO
 # ------------
