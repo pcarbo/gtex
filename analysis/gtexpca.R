@@ -57,7 +57,7 @@ print(summary(gtex.pca)$importance[,1:2])
 pdf(NULL)
 p <- plot.gtex.top2pcs(gtex,gtex.pca)
 ggsave(pc.plot.file,p,height = 4,width = 4,dpi = 200)
-
+dev.off()
 # SESSION INFO
 # ------------
 # This gives information about the computing environment used to
